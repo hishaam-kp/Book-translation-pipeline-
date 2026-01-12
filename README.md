@@ -36,14 +36,29 @@ Run OCR with pytesseract (Hindi/Sanskrit language packs).
 
 Save raw OCR output to output_hindi.txt.
 
+![Pipeline diagram showing PDF → OCR → Clean → Translate → Assemble → Export](docs/pipeline-diagram.png)
+*Pipeline overview: how the notebook transforms scanned pages into the final manuscript.*
+<br>
+<br>
 <h4>2. Paragraph‑Preserving Cleaning</h4>
 
 Split OCR output into lines, remove page numbers and empty lines.
+<h3>OCR sample before and after</h3>
 
+![Scanned page image and raw OCR text side-by-side before cleaning](docs/ocr-sample-before-after.png)
+*Raw scanned page (left) and OCR output (right) demonstrating typical OCR noise before cleaning.*
 Merge lines into paragraphs using sentence terminators (e.g., ।, .).
-
+<br>
+<br>
 Produce clean_paragraph_pages (one page → paragraphs separated by blank lines).
 
+<h3>Paragraph cleaning</h3>
+
+![Notebook cell showing paragraph merging before and after](docs/paragraph-cleaning.png)
+*Paragraph-preserving cleaning: lines merged into coherent paragraphs while preserving sentence boundaries.*
+
+<br>
+<br>
 <h4>3. Translation (resumable & rate‑aware)</h4>
 
 Translate pages using Azure Text Translation (or googletrans for quick tests).
@@ -58,6 +73,13 @@ Processes in batches so runs are short and restartable.
 
 Note: the robust resumable cell is provided and has not been executed in your environment — run conservatively first (small BATCH_SIZE, larger DELAY_SECONDS) to validate.
 
+<h3>Translation progress</h3> 
+
+![tqdm progress bar screenshot during a short translation test run](docs/translation-progress.png)
+*Resumable translation in action — progress and logs during a short test batch.*
+
+<br>
+<br>
 <h4>4. Chapter Detection & Title Overrides</h4>
 
 Extract candidate chapter numbers from the book index (front‑matter).
@@ -67,6 +89,12 @@ Normalize OCR artifacts (e.g., 47. → 4, 1.5 → 15).
 Use detect_chapter_by_number to find pages that start chapters.
 
 Apply KNOWN_TITLES mapping for human‑verified titles when available, and extract the remaining page body.
+<h3>Chapter detection example</h3>
+
+![Notebook output showing detected chapter title and extracted body preview](docs/chapter-detection.png)
+*Detected chapter title and the start of the extracted body after applying title overrides.*
+
+
 
 <h4>5. English Cleaning & Assembly</h4>
 
@@ -77,6 +105,11 @@ Remove repeated words, collapse extra spaces, fix spacing before punctuation, an
 Insert === CHAPTER BREAK === markers before chapter starts.
 
 Remove debug page markers and write final_book.txt (UTF‑8).
+
+<h3>Final assembled text preview</h3> 
+
+![Snippet of final_book.txt showing === CHAPTER BREAK === markers](docs/export-cover-mockup.png)
+*Final assembled manuscript with `=== CHAPTER BREAK ===` markers ready for Word/Google Docs formatting.*
 
 <h4>6. Manual Final Formatting</h4>
 
