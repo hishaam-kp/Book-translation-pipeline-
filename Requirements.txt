@@ -1,0 +1,14 @@
+pdf2image
+pytesseract
+Pillow
+tqdm
+python-dotenv
+azure-ai-translation-text
+azure-core
+googletrans==4.0.0-rc1
+nbformat
+nbconvert
+pytest
+pandas
+numpy
+regex
