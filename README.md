@@ -108,10 +108,10 @@ Remove debug page markers and write final_book.txt (UTF‑8).
 
 <h3>Final assembled text preview</h3> 
 
-![Snippet of final_book.txt showing === CHAPTER BREAK === markers](docs/export-cover-mockup.png)
-*Final assembled manuscript with `=== CHAPTER BREAK ===` markers ready for Word/Google Docs formatting.*
+![Simple cover mockup for the exported PDF](docs/export-cover-mockup.png)
+*Example cover for the final edits!.*
 
-<h4>6. Manual Final Formatting</h4>
+<h3>6. Manual Final Formatting</h3>
 
 Open final_book.txt in Word or Google Docs (choose UTF‑8 encoding).
 
